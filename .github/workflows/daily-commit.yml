@@ -1,0 +1,29 @@
+name: Daily Auto Commit
+
+on:
+  schedule:
+    - cron: '25 3 * * *'   # Daily at 03:25 UTC
+  workflow_dispatch:
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Step by 23f2001007@ds.study.iitm.ac.in
+        run: echo "Running automation"
+
+      - name: Create change
+        run: |
+          echo "Updated on $(date)" >> log.txt
+
+      - name: Commit and Push
+        run: |
+          git config user.name "DevSync Bot"
+          git config user.email "23f2001007@ds.study.iitm.ac.in"
+          git add .
+          git commit -m "Daily automated commit"
+          git push
